@@ -2,6 +2,12 @@
 
 #### Welcome to <b>Pixel Tool</b>, the program designed to enhance the performance of Windows 10 and 11 operating systems, clean and speed up the system, and activating Windows.
 
+
+
+![pixeltool](https://github.com/Pixel2175/pixel-tool/assets/147437230/edf4c9d4-1f21-4763-ba88-36b04ec309be)
+
+
+
 ## features
 
 > Reduce CPU processes.
