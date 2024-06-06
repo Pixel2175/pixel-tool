@@ -10,9 +10,9 @@
 
 > Clean unnecessary files.
 
-> Download all essential driver files.
+> Download all Runtime files.
 
-> Uninstall unnecessary programs in Windows.
+> Uninstall unnecessary Windows programs.
 
 
 ## compile
