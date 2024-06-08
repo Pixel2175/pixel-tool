@@ -137,26 +137,7 @@ def menu():
         #_________________________________________________[AppRemover]__________________________________________
 
         if inp == 2 :
-            os.system("cls")
             print("")
-            colorama.init()
-            winapp = text2art("  Windows App")
-            print(Fore.RED + winapp + Fore.RESET)
-            colorama.deinit()
-            print("""
-     [*]- Calculator             [*]- Snip&sketch          [*]- Paint 3d
-     [*]- Cortana                [*]- Translator           [*]- Weather         
-     [*]- 3D Builder             [*]- 3d viewer            [*]- Your phone
-     [*]- Groove music           [*]- Alarms and clock     [*]- Photos
-     [*]- Mixed reality portal   [*]- Voice recorder       [*]- Camera
-     [*]- Movies & tv            [*]- Get help             [*]- Office
-     [*]- One note               [*]- Messaging            [*]- Xbox game bar
-     [*]- Calendar and mail      [*]- Money                [*]- Xbox 
-     [*]- Feedback hub           [*]- People               [*]- Print 3d  
-     [*]- Maps                   [*]- Skype                [*]- Solitaire
-     [*]- Mobile plans           [*]- Sports               [*]- Sticky notes  
-     [*]- News                   [*]- Tips                                     
-            """)
             print("")
             warning = input("  [?]- are you sure you want \033[1;31;40mRemove Windows Apps? \033[0m (yes/no): ")
             print("")
