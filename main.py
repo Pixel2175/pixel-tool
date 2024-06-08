@@ -14,7 +14,16 @@ def set_size(columns, rows):
 set_size(80,25)
 os.system("cls")
 restore_point_bat = os.path.join(os.path.dirname(__file__), 'data', 'restore_point.bat')
-loppa = input("[*]-First Do You Want To Create Restore Point?? (yes/no): ")
+
+os.system("cls")
+print("")
+colorama.init()
+title = text2art("  Restore   Point")
+print(Fore.BLUE + title + Fore.RESET)
+colorama.deinit()
+print("")
+print("")
+loppa = input("[*]-First Do You Want To Create \033[1;31;40mRestore Point\033[0m?? (yes/no): ")
 if loppa == "yes" or loppa == "Yes" or loppa == "y" or loppa == "Y":
     print("   Create Restore Poite")
     print("   Please wait...")
@@ -218,10 +227,10 @@ def menu():
             print("""
       ####################################################################
       #                                                                  #
-      #      [1]- GitHub        [2]- Discord            [3]- TikTok      #
+      #      [1]- GitHub         [2]- Discord         [3]- Website       #
       #                                                                  #
       #                                                                  #
-      #                         [4]- Website                             #
+      #         [4]- TikTok(Pixel)            [5]- TikTok(7Tech)         #
       #                                                                  #
       ####################################################################
 """)
@@ -232,10 +241,12 @@ def menu():
                 web.open("https://github.com/pixel2175")
             elif chs == "2":
                 web.open("https://discord.gg/tQV6NS2sUR")
-            elif chs == "3":
-                web.open("https://www.tiktok.com/@pixel2715")
             elif chs == "4":
+                web.open("https://www.tiktok.com/@pixel2715")
+            elif chs == "3":
                 web.open("https://pixel31.github.io/")
+            elif chs == "5":
+                web.open("https://www.tiktok.com/@_tech7_")
     
 
 
