@@ -19,12 +19,6 @@ del "%temp%\getadmin.vbs"
 exit /b
 
 :runAsAdmin
-:: Disable Always Read Section
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "AlwaysReadShortcut" /t REG_DWORD /d 0 /f
-
-:: Disable Annoying Features Shortcuts
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnableBalloonTips" /t REG_DWORD /d 0 /f
-
 :: Disable Making Touch Easier
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Wisp\Touch" /v "TouchMode_hold" /t REG_DWORD /d 0 /f
 
@@ -296,12 +290,6 @@ reg add "HKLM\Software\Policies\Microsoft\Internet Explorer\SQM" /v "Disable" /t
 rem Windows Messenger Customer Experience Improvement program
 reg add "HKLM\Software\Policies\Microsoft\Messenger" /v "CEIP" /t REG_DWORD /d 0 /f
 
-rem Allow Cortana
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f
-
-rem Allow search and Cortana to use location
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d 0 /f
-
 rem Windows Error Reporting
 reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t REG_DWORD /d 1 /f
 
@@ -331,9 +319,6 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\ScriptedDiagnosticsProvider\Po
 
 rem Advertising ID
 reg add "HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo" /v "Disabled" /t REG_DWORD /d 1 /f
-
-rem Search Companion
-reg add "HKLM\Software\Policies\Microsoft\SearchCompanion" /v "DisableSearchCompanion" /t REG_DWORD /d 1 /f
 
 rem Microsoft consumer experiences
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableConsumerFeatures" /t REG_DWORD /d 1 /f
