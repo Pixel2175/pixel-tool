@@ -101,3 +101,5 @@ Start-Process "taskkill.exe" -ArgumentList "/f /im OneDrive.exe" -NoNewWindow -W
 Stop-Service -Name OneSyncSvc -Force
 Remove-Item -Path "$env:USERPROFILE\OneDrive" -Recurse -Force
 Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\OneDrive" -Recurse -Force
+
+exit
