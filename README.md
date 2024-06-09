@@ -1,4 +1,4 @@
-# Pixel Tool - 0.1V
+# Pixel Tool - 0.2V
 
 #### Welcome to <b>Pixel Tool</b>, the program designed to enhance the performance of Windows 10 and 11 operating systems, clean and speed up the system, and activating Windows.
 
@@ -13,6 +13,8 @@
 > Download all Runtime files.
 
 > Uninstall unnecessary Windows programs.
+
+> Gpu Optmizer 
 
 
 ## compile
