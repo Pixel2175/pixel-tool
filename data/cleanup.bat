@@ -158,7 +158,37 @@ dism /online /cleanup-image /startcomponentcleanup
 echo Cleaning other system temporary files...
 for /d %%x in (%systemroot%\Installer\$PatchCache$\*) do rd /s /q "%%x"
 
-echo Cleaning process completed.
+cls
+echo Disabling Unnecessary Services
+
+del /s /f /q c:\windows\temp.  
+del /s /f /q C:\WINDOWS\Prefetch  
+del /s /f /q %temp%.  
+del /s /f /q %systemdrive%\*.tmp  
+del /s /f /q %systemdrive%\*._mp  
+del /s /f /q %systemdrive%\*.log  
+del /s /f /q %systemdrive%\*.gid  
+del /s /f /q %systemdrive%\*.chk  
+del /s /f /q %systemdrive%\*.old  
+del /s /f /q %systemdrive%\recycled\*.*  
+del /s /f /q %systemdrive%\$Recycle.Bin\*.*  
+del /s /f /q %windir%\*.bak  
+del /s /f /q %windir%\prefetch\*.*  
+del /s /f /q %LocalAppData%\Microsoft\Windows\Explorer\thumbcache_*.db  
+del /s /f /q %LocalAppData%\Microsoft\Windows\Explorer\*.db  
+del /f /q %SystemRoot%\Logs\CBS\CBS.log  
+del /f /q %SystemRoot%\Logs\DISM\DISM.log  
+deltree /y c:\windows\tempor~1  
+deltree /y c:\windows\temp  
+deltree /y c:\windows\tmp  
+deltree /y c:\windows\ff*.tmp  
+deltree /y c:\windows\history  
+deltree /y c:\windows\cookies  
+deltree /y c:\windows\recent  
+deltree /y c:\windows\spool\printers  
+cls
+timeout /t 10 /nobreak > NUL
+
 start "" "DiskCleaner.lnk"
 
 exit

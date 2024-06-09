@@ -19,6 +19,8 @@ del "%temp%\getadmin.vbs"
 exit /b
 
 :runAsAdmin
+echo Wait ...
+
 setlocal
 
 :: Set the description for the restore point
