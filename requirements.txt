@@ -1,3 +1,4 @@
 colorama
 art
 setwallpaper
+pywin32
