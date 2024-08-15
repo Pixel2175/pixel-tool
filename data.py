@@ -7,7 +7,7 @@ import urllib.parse as parse
 
   ####################################tweak_main###############################################################################################################################################
 def run_command(command):
-    sub.run(["powershell", "-Command", command], capture_output=True, text=True)
+    sub.run(["powershell", "-Command", command], capture_output=True, text=True, shell=True)
 
 
 
