@@ -27,8 +27,8 @@ class Update(tk.CTkToplevel):
         self.title('Check Update')
         self.geometry('275x350')
 
-        self.version='V0.9'
-        self.url='https://github.com/Pixel2175/pixel-tool/releases/tag/V1.4'
+        self.version='V1.4'
+        self.url='https://github.com/Pixel2175/pixel-tool/releases/tag/V1.6'
         
         self.uptodate_logo=ImageTk.PhotoImage(Image.open('images/update_done.png').resize((115,115)))
         self.update_wait_logo=ImageTk.PhotoImage(Image.open('images/update_wait.png').resize((115,115)))
