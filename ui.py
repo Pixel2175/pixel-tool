@@ -5,15 +5,27 @@ import webbrowser as web
 import data
 import os
 import requests as req
+
+
+
 tk.set_appearance_mode('dark')
 tk.set_default_color_theme('theme/purpel.json')
+
+
+if os.path.exists('log.py'):
+    import log
+else:
+    with open('log.py', 'w') as f:
+        f.write("tweaks=[]")
+    import log
+
+
 
 class Update(tk.CTkToplevel):
     def __init__(self,main):
         super().__init__(main)
         self.title('Check Update')
         self.geometry('275x350')
-        self.resizable(False, False)
 
         self.version='V0.9'
         self.url='https://github.com/Pixel2175/pixel-tool/releases/tag/V1.4'
@@ -176,7 +188,8 @@ class Win(tk.CTk):
 
         self.bo_x=37 
         self.bo_y=15 
-
+        
+        
         for i in data.tweak_name:
             btn=tk.CTkSwitch(self.tweak_btns_main,text=i,font=tk.CTkFont('poppins',14,'normal'))
             btn.configure(command=lambda a=btn, b=i: self.bobo(a, b))
@@ -264,6 +277,11 @@ class Win(tk.CTk):
             else:
                 self.btn_y+=40 
 
+    def tweak_btn_checker(self):
+
+        btns = self.tweak_btns_main.winfo_children()
+        for tweak in log.tweaks:
+            btns[tweak].select()
 
 
     def next_tweak(self):
@@ -382,11 +400,17 @@ class Win(tk.CTk):
 
     def bobo(self,btn,var):
         index=data.tweak_name.index(var)
+        log_file = log.tweaks
         if btn.get():
+            log_file.append(index)
+            with open("log.py", 'w') as f:
+                f.write(f"tweaks={log_file}")
             data.on_value[index]()
         else:
+            log_file.remove(index)
+            with open("log.py", 'w') as f:
+                f.write(f"tweaks={log_file}")
             data.off_value[index]()
-            print(data.off_value[index])
 
 
     def interp_changer(self,my_y):
@@ -405,6 +429,7 @@ class Win(tk.CTk):
         self.tools_main.place_forget()
 
     def tweak_btn(self):
+        self.tweak_btn_checker()
         self.interp_changer(95)
         self.tweak_main.place(x=7,y=7)
         self.home_main.place_forget() 
