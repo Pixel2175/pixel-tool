@@ -6,11 +6,8 @@ import data
 import os
 import requests as req
 
-
-
 tk.set_appearance_mode('dark')
 tk.set_default_color_theme('theme/purpel.json')
-
 
 if os.path.exists('log.py'):
     import log
@@ -18,8 +15,6 @@ else:
     with open('log.py', 'w') as f:
         f.write("tweaks=[]")
     import log
-
-
 
 class Update(tk.CTkToplevel):
     def __init__(self,main):
