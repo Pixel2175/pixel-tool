@@ -5,9 +5,23 @@ import webbrowser as web
 import data
 import os
 import requests as req
+import ctypes
+import sys
+
+def is_admin():
+    try:
+        return ctypes.windll.shell32.IsUserAnAdmin()
+    except:
+        return False
+
+if not is_admin():
+    ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+    sys.exit()
+
 
 tk.set_appearance_mode('dark')
 tk.set_default_color_theme('theme/purpel.json')
+
 
 if os.path.exists('log.py'):
     import log
@@ -15,6 +29,8 @@ else:
     with open('log.py', 'w') as f:
         f.write("tweaks=[]")
     import log
+
+
 
 class Update(tk.CTkToplevel):
     def __init__(self,main):
