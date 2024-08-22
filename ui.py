@@ -5,44 +5,25 @@ import webbrowser as web
 import data
 import os
 import requests as req
-import ctypes
-import sys
-
-def is_admin():
-    try:
-        return ctypes.windll.shell32.IsUserAnAdmin()
-    except:
-        return False
-
-if not is_admin():
-    ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
-    sys.exit()
+import json
+from pathlib import Path
 
 
 tk.set_appearance_mode('dark')
-tk.set_default_color_theme('theme/purpel.json')
-
-
-if os.path.exists('log.py'):
-    import log
-else:
-    with open('log.py', 'w') as f:
-        f.write("tweaks=[]")
-    import log
-
-
+tk.set_default_color_theme('blue')
 
 class Update(tk.CTkToplevel):
     def __init__(self,main):
         super().__init__(main)
         self.title('Check Update')
         self.geometry('275x350')
+        self.resizable(False, False)
 
         self.version='V1.4'
-        self.url='https://github.com/Pixel2175/pixel-tool/releases/tag/V1.6'
+        self.url='https://github.com/Pixel2175/pixel-tool/releases/tag/V1.7'
         
-        self.uptodate_logo=ImageTk.PhotoImage(Image.open('images/update_done.png').resize((115,115)))
-        self.update_wait_logo=ImageTk.PhotoImage(Image.open('images/update_wait.png').resize((115,115)))
+        self.uptodate_logo=ImageTk.PhotoImage(Image.open(Path('images/update_done.png')).resize((115,115)))
+        self.update_wait_logo=ImageTk.PhotoImage(Image.open(Path('images/update_wait.png')).resize((115,115)))
 
         self.update_massage=tk.CTkLabel(self,text="Latest Version !!",font=tk.CTkFont('poppins',24,'bold'),text_color='#afafaf')
         self.update_massage.place(x=45,y=180)
@@ -74,24 +55,38 @@ class Win(tk.CTk):
         self.geometry("901x490")
         self.resizable(False,False)
         self.title("Pixel Tool")
+        
+
+        self.json_path = "C:\\Users\\vboxuser\\AppData\\Local\\"
+        self.json_file = f"{self.json_path}log.json"
+
+
+        if not os.path.exists(self.json_file):
+            with open(self.json_file,'w') as f:
+                f.write("{\n" +'    "tweaks": [] ' +"\n}")
+                
+                
+        with open(self.json_file, 'r') as f:
+            self.log_tweaks = json.load(f)["tweaks"]
+
 
         # Header
         self.header=tk.CTkFrame(self,height=56,width=880,corner_radius=20)
         self.header.pack(pady=11,padx=10,fill='y')
-        self.logo=tk.CTkButton(self.header,text='',image=ImageTk.PhotoImage(Image.open('images/icon.png').resize((36,35))),height=35,width=35,fg_color="transparent",hover_color="#2c074f")
+        self.logo=tk.CTkButton(self.header,text='',image=ImageTk.PhotoImage(Image.open(Path('images/icon.png')).resize((36,35))),height=35,width=35,fg_color="transparent",hover_color="#2c074f")
         self.logo.place(x=13,y=6)
         self.titlee = tk.CTkLabel(self.header,text="PIXEL TOOL",font=tk.CTkFont('poppins',23,"bold"))
         self.titlee.place(x=71,y=11)
         self.github_logo = tk.CTkButton(self.header,
                                         text="",
-                                        image=ImageTk.PhotoImage(Image.open("images/github.png").resize((31,30))),
+                                        image=ImageTk.PhotoImage(Image.open(Path("images/github.png")).resize((31,30))),
                                         height=31,width=30,
                                         fg_color="transparent",hover_color="#2c074f",
                                         command=self.github_link)
         self.github_logo.place(x=771,y=9)
         self.discord_logo= tk.CTkButton(self.header,
                                         text="",
-                                        image=ImageTk.PhotoImage(Image.open("images/discord.png").resize((31,30))),
+                                        image=ImageTk.PhotoImage(Image.open(Path("images/discord.png")).resize((31,30))),
                                         height=31,width=30,
                                         fg_color="transparent",hover_color="#2c074f",
                                         command=self.discord_link)
@@ -100,7 +95,7 @@ class Win(tk.CTk):
 
         self.update_logo=tk.CTkButton(self.header,
                                       text='',
-                                      image=ImageTk.PhotoImage(Image.open('images/update.png').resize((36,36))),
+                                      image=ImageTk.PhotoImage(Image.open(Path('images/update.png')).resize((36,36))),
                                       height=36,width=36,
                                       fg_color='transparent',hover_color='#2c074f',
                                       command=self.check_update_btn)
@@ -128,7 +123,7 @@ class Win(tk.CTk):
                                width=0,
                                bg_color="#2c074f",
                                hover_color="#2c074f",fg_color="transparent",
-                               image=ImageTk.PhotoImage(Image.open("images/tweak.png").resize((30,30))),
+                               image=ImageTk.PhotoImage(Image.open(Path("images/tweak.png")).resize((30,30))),
                                text_color="#b4b4b4",font=self.menubuttons_font,
                                 command=self.tweak_btn)
         self.tweak.place(x=23,y=95)
@@ -138,7 +133,7 @@ class Win(tk.CTk):
                                width=0,
                                bg_color="#2c074f",
                                hover_color="#2c074f",fg_color="transparent",
-                               image=ImageTk.PhotoImage(Image.open("images/debloat.png").resize((30,30))),
+                               image=ImageTk.PhotoImage(Image.open(Path("images/debloat.png")).resize((30,30))),
                                text_color="#b4b4b4",font=self.menubuttons_font,
                                command=self.debloat_btn)
         self.debloat.place(x=23,y=155)
@@ -148,7 +143,7 @@ class Win(tk.CTk):
                                width=0,
                                bg_color="#2c074f",
                                hover_color="#2c074f",fg_color="transparent",
-                               image=ImageTk.PhotoImage(Image.open("images/toolbox.png").resize((33,33))),
+                               image=ImageTk.PhotoImage(Image.open(Path("images/toolbox.png")).resize((33,33))),
                                text_color="#b4b4b4",font=self.menubuttons_font,
                                command=self.tools_btn)
         self.tools.place(x=23,y=215)
@@ -156,7 +151,7 @@ class Win(tk.CTk):
         self.interp=tk.CTkLabel(self.menu,text='',bg_color="#b4b4b4",width=3,height=32)
         self.interp.place(x=20,y=36)
 
-        self.rikka_icon=tk.CTkLabel(self.menu,text="",image=ImageTk.PhotoImage(Image.open("images/rikka.png").resize((136,128))))
+        self.rikka_icon=tk.CTkLabel(self.menu,text="",image=ImageTk.PhotoImage(Image.open(Path("images/rikka.png")).resize((136,128))))
         self.rikka_icon.place(x=25,y=270)
 
         self.main=tk.CTkFrame(self,corner_radius=21,height=3000)
@@ -199,8 +194,7 @@ class Win(tk.CTk):
 
         self.bo_x=37 
         self.bo_y=15 
-        
-        
+
         for i in data.tweak_name:
             btn=tk.CTkSwitch(self.tweak_btns_main,text=i,font=tk.CTkFont('poppins',14,'normal'))
             btn.configure(command=lambda a=btn, b=i: self.bobo(a, b))
@@ -212,12 +206,12 @@ class Win(tk.CTk):
                 self.bo_y+=30
     
         self.next_btn_tweak=tk.CTkButton(self.tweak_main,text='',
-                                         image=ImageTk.PhotoImage(Image.open('images/next.png').resize((36,48))),
+                                         image=ImageTk.PhotoImage(Image.open(Path('images/next.png')).resize((36,48))),
                                          hover_color='#2c074f',fg_color='#2c074f',width=30,height=40,command=self.next_tweak)
         self.next_btn_tweak.place(x=590,y=320)
         
         self.back_btn_tweak=tk.CTkButton(self.tweak_main,text='',
-                                         image=ImageTk.PhotoImage(Image.open('images/back.png').resize((36,48))),
+                                         image=ImageTk.PhotoImage(Image.open(Path('images/back.png')).resize((36,48))),
                                          hover_color='#2c074f',fg_color="#2c074f",width=30,height=40,command=self.back_tweak)
         self.back_btn_tweak.place(x=480,y=320)
         self.tweak_page_num=tk.CTkLabel(self.tweak_main,text_color='#b4b4b4',text='1/5',font=tk.CTkFont('poppins',36,'bold'))
@@ -226,10 +220,10 @@ class Win(tk.CTk):
         self.btns_main=tk.CTkCanvas(self.debloat_main,width=1292,height=320,bg="#2c074f",highlightthickness=0)
         self.btns_main.place(x=0,y=0)
         
-        self.debloat_next_page=tk.CTkButton(self.debloat_main,image=ImageTk.PhotoImage(Image.open('images/next.png').resize((36,48))),fg_color='#2c074f',hover_color='#2c074f',width=30,height=40,text='',command=self.debloat_next_btn)
+        self.debloat_next_page=tk.CTkButton(self.debloat_main,image=ImageTk.PhotoImage(Image.open(Path('images/next.png')).resize((36,48))),fg_color='#2c074f',hover_color='#2c074f',width=30,height=40,text='',command=self.debloat_next_btn)
         self.debloat_next_page.place(x=590,y=320)
 
-        self.debloat_back_page=tk.CTkButton(self.debloat_main,image=ImageTk.PhotoImage(Image.open('images/back.png').resize((36,48))),fg_color='#2c074f',hover_color='#2c074f',width=30,height=40,text='',command=self.debloat_back_btn)
+        self.debloat_back_page=tk.CTkButton(self.debloat_main,image=ImageTk.PhotoImage(Image.open(Path('images/back.png')).resize((36,48))),fg_color='#2c074f',hover_color='#2c074f',width=30,height=40,text='',command=self.debloat_back_btn)
         self.debloat_back_page.place(x=480,y=320)
 
         self.debloat_page_num=tk.CTkLabel(self.debloat_main,text_color='#b4b4b4',text='1/2',font=tk.CTkFont('poppins',36,'bold'))
@@ -265,14 +259,14 @@ class Win(tk.CTk):
         self.entry_path=tk.CTkEntry(self.tools_main,width=300,textvariable=self.path,font=tk.CTkFont('poppins',13,'normal'))
         self.entry_path.place(x=20,y=337)
         
-        self.open_dialog_btn=tk.CTkButton(self.tools_main,text="Open",image=ImageTk.PhotoImage(Image.open('images/open.png').resize((20,20))),font=tk.CTkFont('poppins',18,'normal'),width=110,command=self.open_dialog)
+        self.open_dialog_btn=tk.CTkButton(self.tools_main,text="Open",image=ImageTk.PhotoImage(Image.open(Path('images/open.png')).resize((20,20))),font=tk.CTkFont('poppins',18,'normal'),width=110,command=self.open_dialog)
         self.open_dialog_btn.place(x=330,y=335)
 
         self.app_station=tk.CTkLabel(self.tools_main,text='',font=tk.CTkFont('poppins',20,'bold'))
         self.app_station.place(x=15,y=300)
 
 
-        self.download_btn=tk.CTkButton(self.tools_main,text='Download',image=ImageTk.PhotoImage(Image.open('images/download.png').resize((20,20))),font=tk.CTkFont('poppins',18,'normal'),command=self.download_apps)
+        self.download_btn=tk.CTkButton(self.tools_main,text='Download',image=ImageTk.PhotoImage(Image.open(Path('images/download.png')).resize((20,20))),font=tk.CTkFont('poppins',18,'normal'),command=self.download_apps)
         self.download_btn.place(x=455,y=335)
 
 
@@ -288,11 +282,6 @@ class Win(tk.CTk):
             else:
                 self.btn_y+=40 
 
-    def tweak_btn_checker(self):
-
-        btns = self.tweak_btns_main.winfo_children()
-        for tweak in log.tweaks:
-            btns[tweak].select()
 
 
     def next_tweak(self):
@@ -351,7 +340,6 @@ class Win(tk.CTk):
             data.download_selected.append(index)
         else:
             data.download_selected.remove(index)
-        print(data.download_selected)
         
 
     def how_to_restore(self):
@@ -408,22 +396,25 @@ class Win(tk.CTk):
             self.btns_main.place(x=0)
             self.debloat_page_num.configure(text='1/2')
 
-
+    def tweaks_checker(self):
+        btns = self.tweak_btns_main.winfo_children()
+        for tweak in self.log_tweaks:
+            btns[tweak].select()
+   
     def bobo(self,btn,var):
         index=data.tweak_name.index(var)
-        log_file = log.tweaks
+        
         if btn.get():
-            log_file.append(index)
-            with open("log.py", 'w') as f:
-                f.write(f"tweaks={log_file}")
+            self.log_tweaks.append(index)
             data.on_value[index]()
         else:
-            log_file.remove(index)
-            with open("log.py", 'w') as f:
-                f.write(f"tweaks={log_file}")
+            self.log_tweaks.remove(index)
             data.off_value[index]()
+        
+        with open(self.json_file,'w') as f:
+            f.write("{\n"+ '    "tweaks": ' f"{self.log_tweaks}" + "\n}") 
 
-
+        
     def interp_changer(self,my_y):
         if self.interp.winfo_y() > my_y: 
             self.interp.place(y=self.interp.winfo_y() - 1)
@@ -440,7 +431,7 @@ class Win(tk.CTk):
         self.tools_main.place_forget()
 
     def tweak_btn(self):
-        self.tweak_btn_checker()
+        self.tweaks_checker()
         self.interp_changer(95)
         self.tweak_main.place(x=7,y=7)
         self.home_main.place_forget() 
