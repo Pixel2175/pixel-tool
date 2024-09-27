@@ -57,7 +57,7 @@ class Win(tk.CTk):
         self.title("Pixel Tool")
         
 
-        self.json_path = "C:\\Users\\vboxuser\\AppData\\Local\\"
+        self.json_path = f"C:\\Users\\{os.getlogin()}\\AppData\\Local\\"
         self.json_file = f"{self.json_path}log.json"
 
 
